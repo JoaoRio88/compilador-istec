@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundamentos do CSS</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../script_darkmode.js"></script>
+    <script src="script.js"></script>
+</head>
+<body class="light-mode">
+    <header class="main-header">
+        <h1>Fundamentos do CSS</h1>
+        <ul class="nav-menu">
+            <li><a href="#definicao">Definição</a></li>
+            <li><a href="#seletores">Seletores</a></li>
+            <li><a href="#propriedades">Propriedades</a></li>
+            <li><a href="#layout">layout</a></li>
+            <li><a href="#responsivo">Design Responsivo</a></li>
+            <li><a href="#animacoes">Animações</a></li>
+            <li><a href="#video">Vídeo</a></li>
+        </ul>
+    </header>
+
+    <div class="content">
+        <section id="definicao">
+            <h2>O que é CSS?</h2>
+            <p>CSS (Cascading Style Sheets) é uma linguagem de estilo usada para definir a aparência e o layout de elementos em um documento HTML. Permite separar a apresentação do conteúdo, facilitando a personalização de cores, fontes, margens, espaçamentos, entre outros aspetos visuais de uma página web.</p>
+            <h3>Vantagens do CSS:</h3>
+            <ul>
+                <li>Separação de responsabilidades: HTML para estrutura, CSS para apresentação</li>
+                <li>Reutilização: Um ficheiro CSS pode estilizar múltiplas páginas</li>
+                <li>Manutenção: Mudanças centralizadas e mais fáceis</li>
+                <li>Performance: Carregamento mais rápido com cache</li>
+                <li>Flexibilidade: Diferentes estilos para diferentes dispositivos</li>
+            </ul>
+            <h3>Formas de Adicionar CSS:</h3>
+            <ul>
+                <li>Inline: Diretamente no elemento HTML com o atributo "style="</li>
+                <li>Interno: Dentro de uma tag <style> no <head> do documento</li>
+                <li>Externo: Em ficheiro CSS separado (recomendado)</li>
+            </ul>
+            <h3>Exemplos dos Três Métodos:</h3>
+            <pre data-type="css"><code>
+/* 1. CSS Inline */
+p { color: blue; font-size: 18px; }
+
+/* 2. CSS Interno */
+<style>
+    p { color: blue; font-size: 18px; }
+</style>
+
+/* 3. CSS Externo */
+<link rel="stylesheet" href="estilos.css">
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <p>Texto para CSS interno ou externo</p>
+    <p>Outro texto para testar</p>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="seletores">
+            <h2>Seletores CSS</h2>
+            <p>Os seletores determinam quais elementos HTML serão estilizados. Existem vários tipos de seletores:</p>
+            <h3>Seletores Básicos:</h3>
+            <ul>
+                <li>Elemento: p { } - Seleciona todos os parágrafos</li>
+                <li>Classe: .minhaClasse { } - Seleciona elementos com class="minhaClasse"</li>
+                <li>ID: #meuId { } - Seleciona elemento com id="meuId"</li>
+                <li>Universal: * { } - Seleciona todos os elementos</li>
+            </ul>
+            <h3>Seletores Combinados:</h3>
+            <pre data-type="css"><code>
+/* Descendente - p dentro de div */
+div p { color: red; }
+
+/* Filho direto - p filho direto de div */
+div > p { color: blue; }
+
+/* Irmão adjacente - p imediatamente após h2 */
+h2 + p { font-weight: bold; }
+
+/* Irmãos gerais - todos os p após h2 */
+h2 ~ p { margin-left: 20px; }
+</code>
+<button class="compile-btn" data-html='
+	<!DOCTYPE html>
+	<html lang="pt">
+	<head>
+		<meta charset="UTF-8">
+		<title>Pré-visualização</title>
+	</head>
+	<body>
+		<div>
+			<p>Parágrafo filho direto de div</p>
+			<span><p>Parágrafo dentro de span</p></span>
+			<h2>Título</h2>
+			<p>Parágrafo imediatamente após h2</p>
+			<p>Outro parágrafo após h2</p>
+		</div>
+		<p>Parágrafo fora de div</p>
+		<h2>Outro título</h2>
+		<p>Parágrafo após outro h2</p>
+	</body>
+	</html>
+	'>Compilador</button>
+</pre>
+            <h3>Pseudo-classes:</h3>
+            <pre data-type="css"><code>
+/* Estados de link */
+a:link { color: blue; }
+a:visited { color: purple; }
+a:hover { color: red; }
+a:active { color: orange; }
+
+/* Estruturais */
+p:first-child { font-weight: bold; }
+p:last-child { margin-bottom: 0; }
+p:nth-child(odd) { background: #f0f0f0; }
+
+/* Formulários */
+input:focus { border-color: blue; }
+input:valid { border-color: green; }
+input:invalid { border-color: red; }
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <a href="#">Link de teste</a>
+    <a href="#">Outro link</a>
+    <div>
+        <p>Primeiro parágrafo</p>
+        <p>Segundo parágrafo</p>
+        <p>Terceiro parágrafo</p>
+        <p>Quarto parágrafo</p>
+    </div>
+    <form>
+        <input type="text" required placeholder="Digite algo">
+        <input type="email" placeholder="Digite um email">
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Pseudo-elementos:</h3>
+            <pre data-type="css"><code>
+/* Primeira linha e primeira letra */
+p::first-line { font-weight: bold; }
+p::first-letter { font-size: 2em; }
+
+/* Conteúdo antes e depois */
+h2::before { content: "★ "; }
+h2::after { content: " ★"; }
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <p>Este é um parágrafo de teste com várias linhas para estilizar. Segunda linha aqui.</p>
+    <p>Outro parágrafo com várias linhas para testar a estilização.</p>
+    <h2>Título de teste</h2>
+    <h2>Outro título</h2>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="propriedades">
+            <h2>Propriedades CSS Essenciais</h2>
+            <h3>Cores e Fundos:</h3>
+            <pre data-type="css"><code>
+/* Cores */
+color: #ff0000;           /* Hexadecimal */
+color: rgb(255, 0, 0);    /* RGB */
+color: rgba(255, 0, 0, 0.5); /* RGB com transparência */
+color: hsl(0, 100%, 50%); /* HSL */
+
+/* Fundos */
+background-color: #f0f0f0;
+background-image: url('imagem.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <p>Texto para testar cores</p>
+    <div>Fundo de teste</div>
+    <p>Outro texto para cor</p>
+    <div>Outro fundo para testar</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Tipografia:</h3>
+            <pre data-type="css"><code>
+/* Fontes */
+font-family: 'Arial', sans-serif;
+font-size: 16px;
+font-weight: bold;        /* normal, bold, 100-900 */
+font-style: italic;
+line-height: 1.5;
+
+/* Texto */
+text-align: center;       /* left, right, center, justify */
+text-decoration: underline;
+text-transform: uppercase; /* lowercase, capitalize */
+letter-spacing: 2px;
+word-spacing: 4px;
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <p>Este é um texto para testar tipografia e estilos de texto.</p>
+    <p>Texto para alinhamento.</p>
+    <p>Texto para transformação.</p>
+    <p>Texto para fontes.</p>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Box Model:</h3>
+            <pre data-type="css"><code>
+/* Dimensões */
+width: 300px;
+height: 200px;
+max-width: 100%;
+min-height: 400px;
+
+/* Espaçamentos */
+margin: 20px;             /* Espaço externo */
+padding: 15px;            /* Espaço interno */
+margin: 10px 20px;        /* vertical horizontal */
+padding: 10px 15px 20px 25px; /* top right bottom left */
+
+/* Bordas */
+border: 2px solid #333;
+border-radius: 10px;
+border-top: 1px dashed red;
+
+/* Box-sizing */
+box-sizing: border-box;   /* Inclui padding e border na largura */
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div>Teste do box model</div>
+    <div>Box com margem e padding</div>
+    <div>Box com borda arredondada</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Posicionamento:</h3>
+            <pre data-type="css"><code>
+/* Position */
+position: static;         /* Padrão */
+position: relative;       /* Relativo à posição original */
+position: absolute;       /* Relativo ao ancestral posicionado */
+position: fixed;          /* Relativo à viewport */
+position: sticky;         /* Híbrido relativo/fixo */
+
+/* Coordenadas */
+top: 10px;
+right: 20px;
+bottom: 30px;
+left: 40px;
+
+/* Z-index */
+z-index: 100;            /* Controla a sobreposição */
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <h1>Elemento relativo</h1>
+    <p>Elemento absoluto</p>
+    <button>Elemento fixo</button><p>
+    <div>Elemento sticky</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="layout">
+            <h2>Técnicas de Layout</h2>
+            <h3>Flexbox:</h3>
+            <p>Flexbox é ideal para layouts unidimensionais (linha ou coluna):</p>
+            <pre data-type="css"><code>
+/* Container flex */
+.container {
+    display: flex;
+    flex-direction: row;      /* row, column, row-reverse, column-reverse */
+    justify-content: center;  /* flex-start, flex-end, center, space-between, space-around */
+    align-items: center;      /* flex-start, flex-end, center, stretch, baseline */
+    flex-wrap: wrap;          /* nowrap, wrap, wrap-reverse */
+    gap: 20px;               /* Espaço entre itens */
+}
+
+/* Itens flex */
+.item {
+    flex: 1;                 /* flex-grow flex-shrink flex-basis */
+    flex-grow: 2;            /* Cresce proporcionalmente */
+    flex-shrink: 0;          /* Não encolhe */
+    align-self: flex-start;  /* Alinhamento individual */
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div class="container">
+        <div class="item">Item 1</div>
+        <div class="item">Item 2</div>
+        <div class="item">Item 3</div>
+        <div class="item">Item 4</div>
+    </div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>CSS Grid:</h3>
+            <p>Grid é ideal para layouts bidimensionais (linhas e colunas):</p>
+            <pre data-type="css"><code>
+/* Container grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;    /* 3 colunas */
+    grid-template-rows: 100px auto 50px;   /* 3 linhas */
+    gap: 20px;
+    grid-template-areas: 
+        "header header header"
+        "sidebar main aside"
+        "footer footer footer";
+}
+
+/* Itens grid */
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.aside { grid-area: aside; }
+.footer { grid-area: footer; }
+
+/* Posicionamento por linhas */
+.item { grid-column: 2 / 4; grid-row: 1 / 3; }
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="header">Cabeçalho</div>
+        <div class="sidebar">Barra lateral</div>
+        <div class="main">Principal</div>
+        <div class="aside">Lateral</div>
+        <div class="footer">Rodapé</div>
+        <div class="item">Item personalizado</div>
+    </div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Float (Método Clássico):</h3>
+            <pre data-type="css"><code>
+/* Float */
+.left { float: left; }
+.right { float: right; }
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body class="clearfix">
+    <div class="left">Esquerda</div>
+    <div class="right">Direita</div>
+    <div>Outro elemento</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="responsivo">
+            <h2>Design Responsivo</h2>
+            <h3>Media Queries:</h3>
+            <pre data-type="css"><code>
+/* Mobile First */
+.container {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .container {
+        max-width: 750px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        padding: 30px;
+    }
+}
+
+/* Orientação */
+@media (orientation: landscape) {
+    .sidebar { display: block; }
+}
+
+/* Impressão */
+@media print {
+    .no-print { display: none; }
+    body { font-size: 12pt; }
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">Barra lateral</div>
+        <p>Conteúdo do container</p>
+    </div>
+    <div class="no-print">Não imprime</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Unidades Responsivas:</h3>
+            <pre data-type="css"><code>
+/* Unidades relativas */
+width: 50%;              /* Relativo ao pai */
+font-size: 1.2em;        /* Relativo ao pai */
+font-size: 1.5rem;       /* Relativo ao root */
+height: 100vh;           /* 100% da viewport height */
+width: 50vw;             /* 50% da viewport width */
+
+/* Funções CSS */
+width: calc(100% - 40px); /* Cálculos */
+font-size: clamp(1rem, 2.5vw, 2rem); /* Mín, preferido, máx */
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div>Teste de largura relativa</div>
+    <p>Texto com em</p>
+    <p>Texto com rem</p>
+    <div>Teste de altura viewport</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Imagens Responsivas:</h3>
+            <pre data-type="css"><code>
+/* Imagens fluidas */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Background responsivo */
+.hero {
+    background-image: url('mobile.jpg');
+}
+
+@media (min-width: 768px) {
+    .hero {
+        background-image: url('desktop.jpg');
+    }
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <img src="https://istec-porto.pt/wp-content/uploads/2020/01/beAsset-1logo.png" alt="Imagem de teste">
+    <div class="hero"></div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="animacoes">
+            <h2>Animações e Transições</h2>
+            <h3>Transições:</h3>
+            <p>Transições suavizam mudanças de propriedades:</p>
+            <pre data-type="css"><code>
+/* Transição básica */
+.botao {
+    background-color: blue;
+    transition: background-color 0.3s ease;
+}
+
+.botao:hover {
+    background-color: red;
+}
+
+/* Transições múltiplas */
+.card {
+    transform: scale(1);
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <button class="botao">Botão de teste</button>
+    <div class="card">Card de teste</div>
+    <div class="card">Outro card</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Animações com @keyframes:</h3>
+            <pre data-type="css"><code>
+/* Definir keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Aplicar animação */
+.elemento {
+    animation: fadeIn 1s ease-in-out;
+    animation: bounce 2s infinite;
+}
+
+/* Propriedades de animação */
+.loading {
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-delay: 0.5s;
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div class="elemento">Elemento animado</div>
+    <div class="loading">Carregando</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Transformações:</h3>
+            <pre data-type="css"><code>
+/* Transformações 2D */
+transform: translate(50px, 100px);  /* Mover */
+transform: scale(1.5);              /* Escalar */
+transform: rotate(45deg);           /* Rodar */
+transform: skew(30deg, 20deg);      /* Inclinar */
+
+/* Transformações 3D */
+transform: translateZ(50px);
+transform: rotateX(45deg);
+transform: rotateY(45deg);
+transform: perspective(1000px);
+
+/* Combinações */
+transform: translate(50px, 100px) rotate(45deg) scale(1.2);
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div>Mover</div>
+    <div>Escalar</div>
+    <div>Rodar</div>
+    <div>Inclinar</div>
+    <div>Combinação</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+            <h3>Exemplo Prático:</h3>
+            <pre data-type="css"><code>
+/* Card com hover effect */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Loading spinner */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+            </code>
+            <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-visualização</title>
+</head>
+<body>
+    <div class="card">Card de teste</div>
+    <div class="card">Outro card</div>
+    <div class="spinner">Spinner</div>
+</body>
+</html>
+' data-type="html">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="video">
+            <h2>Recurso Adicional</h2>
+            <p>Assista ao vídeo abaixo para aprofundar seus conhecimentos em CSS:</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/ZMCemNmB_v0?si=OTX6hkVn2ebP0mvh" title="Tutorial CSS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <p>© 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+        <p>José Lamelas | João Rio</p>
+    </footer>
+   
+</body>
+</html>

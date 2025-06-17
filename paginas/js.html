@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao JavaScript</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../script_darkmode.js"></script>
+    <script src="script.js"></script>
+</head>
+<body class="light-mode">
+    <header class="main-header">
+        <h1>Fundamentos do JavaScript</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#definicao">Definição</a></li>
+                <li><a href="#sintaxe">Sintaxe</a></li>
+                <li><a href="#dom">Manipulação DOM</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#async">Programação Assíncrona</a></li>
+                <li><a href="#apis">APIs Modernas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section id="definicao">
+            <h2>O que é JavaScript?</h2>
+            <p>JavaScript é uma linguagem que torna as páginas web interativas e dinâmicas. Imagine um site como uma casa: o HTML é a estrutura (paredes e telhado), o CSS é a decoração (cores e móveis), e o JavaScript é a eletricidade que faz as luzes acenderem, os eletrodomésticos funcionarem e as portas abrirem automaticamente. Com JavaScript, você pode criar botões que reagem a cliques, formulários que validam dados, ou até jogos diretamente no navegador!</p>
+            <p>Originalmente, o JavaScript foi criado para funcionar nos navegadores (como Chrome ou Firefox), mas hoje ele é usado em servidores (com Node.js), aplicativos móveis, e até dispositivos inteligentes, como lâmpadas conectadas. É uma linguagem fácil de começar, mas poderosa o suficiente para construir sistemas complexos.</p>
+            
+            <h3>Por que aprender JavaScript?</h3>
+            <ul>
+                <li><strong>Interatividade:</strong> Faz sites responderem às ações dos usuários, como clicar ou rolar a página.</li>
+                <li><strong>Versatilidade:</strong> Usado em sites, aplicativos, servidores e mais.</li>
+                <li><strong>Comunidade:</strong> Tem uma enorme comunidade e muitas bibliotecas prontas, como React para interfaces modernas.</li>
+            </ul>
+
+            <h3>Onde o JavaScript é usado?</h3>
+            <ul>
+                <li><strong>Frontend:</strong> Sites interativos, como menus que abrem ou sliders de imagens.</li>
+                <li><strong>Backend:</strong> Servidores que processam dados, como em lojas online.</li>
+                <li><strong>Mobile:</strong> Apps como Uber, criados com React Native.</li>
+                <li><strong>Desktop:</strong> Programas como Visual Studio Code, feitos com Electron.</li>
+                <li><strong>Jogos:</strong> Jogos simples no navegador ou até em plataformas como itch.io.</li>
+            </ul>
+            <p>Este tutorial vai te guiar pelos fundamentos do JavaScript com exemplos práticos. Clique em "Compilador" para testar cada código no nosso editor interativo!</p>
+        </section>
+
+        <section id="sintaxe">
+            <h2>Sintaxe e Conceitos Básicos</h2>
+            <p>A sintaxe do JavaScript é como a gramática de uma língua: são as regras para escrever código que o computador entende. Aqui, você aprenderá os conceitos básicos, como guardar informações, criar funções, tomar decisões e repetir ações.</p>
+            
+            <h3>Variáveis e Tipos de Dados</h3>
+            <p>Variáveis são como potes onde você guarda informações, como nomes, números ou listas. Em JavaScript, usamos <code>let</code> para valores que podem mudar, <code>const</code> para valores fixos, e <code>var</code> (menos comum). Cada dado tem um tipo, como texto (string) ou número.</p>
+            <p><strong>Por que isso é útil?</strong> Imagine que você está criando um site de cadastro: variáveis guardam o nome e a idade do usuário para usá-los depois.</p>
+            <p><strong>Como funciona:</strong> O código cria variáveis com diferentes tipos de dados e usa <code>typeof</code> para mostrar o tipo de cada uma. O resultado é exibido no elemento <code>&lt;div id="output"&gt;</code>, que está no HTML. O método <code>innerHTML</code> insere o texto formatado no DOM.</p>
+            <pre>
+<code>
+let nome = "João";           // String: texto entre aspas
+const idade = 25;            // Number: número sem aspas
+var ativo = true;            // Boolean: verdadeiro ou falso
+let hobbies = ["leitura", "programação"]; // Array: lista de itens
+let pessoa = {               // Object: conjunto de propriedades
+  nome: "Maria",
+  idade: 30,
+  profissao: "Desenvolvedora"
+};
+
+// Exibir tipos de dados no elemento output
+let output = document.getElementById("output");
+output.innerHTML = `
+  Tipo de nome: ${typeof nome}<br>
+  Tipo de idade: ${typeof idade}<br>
+  Tipo de ativo: ${typeof ativo}<br>
+  Tipo de hobbies: ${typeof hobbies}<br>
+  Tipo de pessoa: ${typeof pessoa}
+`;
+</code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Variáveis</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 100px; }
+    </style>
+</head>
+<body>
+    <h1>Tipos de Variáveis</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 100px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Funções</h3>
+            <p>Funções são como receitas: você define os passos uma vez e pode usá-los várias vezes. Elas ajudam a organizar o código e realizar tarefas específicas, como dizer "Olá" ou calcular algo.</p>
+            <p><strong>Por que isso é útil?</strong> Se você tem um site que mostra saudações para cada visitante, uma função evita repetir o mesmo código.</p>
+            <p><strong>Como funciona:</strong> O código define três tipos de funções: tradicional, arrow, e anônima. Cada uma realiza uma tarefa (saudação, soma, multiplicação) e o resultado é mostrado no <code>&lt;div id="output"&gt;</code>. A função <code>saudacao</code> usa um parâmetro <code>nome</code>, enquanto <code>somar</code> e <code>multiplicar</code> usam dois parâmetros.</p>
+                
+            <pre>
+<code>
+function saudacao(nome) {
+  return "Olá, " + nome + "!"; // Concatena o nome com uma saudação
+}
+
+const somar = (a, b) => a + b; // Soma dois números
+
+const multiplicar = function(a, b) {
+  return a * b; // Multiplica dois números
+};
+
+// Exibir resultados no elemento output
+let output = document.getElementById("output");
+output.innerHTML = `
+  Saudação: ${saudacao("Pedro")}<br>
+  Soma: ${somar(5, 3)}<br>
+  Multiplicação: ${multiplicar(4, 6)}
+`;
+ </code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Funções</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 100px; }
+    </style>
+</head>
+<body>
+    <h1>Funções em Ação</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 100px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Estruturas de Controle</h3>
+            <p>As estruturas de controle decidem o que o código faz com base em condições (como "se isso, faça aquilo") ou repetem ações (como "faça isso 5 vezes"). Elas são essenciais para criar lógica no seu programa.</p>
+            <p><strong>Por que isso é útil?</strong> Em um site de ingressos, você pode usar condições para verificar se alguém é maior de idade ou loops para listar eventos disponíveis.</p>
+            <p><strong>Como funciona:</strong> O código usa <code>if/else</code> para verificar a idade, <code>switch</code> para escolher um dia, e diferentes loops (<code>for</code>, <code>for...of</code>, <code>for...in</code>, <code>while</code>) para repetir ações. Cada resultado é concatenado em variáveis e exibido no <code>&lt;div id="output"&gt;</code> com quebras de linha (<code>&lt;br&gt;</code>) para clareza.</p>
+            <pre>
+                <code>
+let idade = 20;
+let resultado = "";
+if (idade >= 18) {
+  resultado = "Maior de idade";
+} else if (idade >= 16) {
+  resultado = "Pode conduzir";
+} else {
+  resultado = "Menor de idade";
+}
+
+let diaSemana = 1;
+let dia = "";
+switch (diaSemana) {
+  case 1:
+    dia = "Segunda-feira";
+    break;
+  case 2:
+    dia = "Terça-feira";
+    break;
+  default:
+    dia = "Outro dia";
+}
+
+let números = "";
+for (let i = 0; i < 5; i++) {
+  números += "Número " + i + "<br>";
+}
+
+let hobbies = ["leitura", "programação"];
+let listaHobbies = "";
+for (let hobby of hobbies) {
+  listaHobbies += hobby + "<br>";
+}
+
+let pessoa = {nome: "Maria", idade: 30};
+let propriedades = "";
+for (let propriedade in pessoa) {
+  propriedades += propriedade + ": " + pessoa[propriedade] + "<br>";
+}
+
+let contador = 0;
+let contagem = "";
+while (contador < 3) {
+  contagem += "Contador: " + contador + "<br>";
+  contador++;
+}
+
+let output = document.getElementById("output");
+output.innerHTML = `
+  Condicional: ${resultado}<br>
+  Switch: ${dia}<br>
+  Loop for:<br>${números}
+  For...of:<br>${listaHobbies}
+  For...in:<br>${propriedades}
+  While:<br>${contagem}
+`;
+                </code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="en">
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Estruturas de Controle</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Estruturas de Controle</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 200px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Arrays e Métodos</h3>
+            <p>Arrays são listas que guardam vários valores, como uma lista de compras. JavaScript tem métodos para adicionar, remover ou transformar itens nos arrays.</p>
+            <p><strong>Por que isso é útil?</strong> Em um site de loja, você pode usar arrays para listar produtos, filtrar os que estão em promoção, ou calcular o total do carrinho.</p>
+            <p><strong>Como funciona:</strong> O código cria um array e usa métodos como <code>push</code>, <code>pop</code>, <code>filter</code>, <code>map</code>, e <code>reduce</code> para manipulá-lo. O método <code>join</code> transforma arrays em texto com vírgulas. Os resultados são exibidos no <code>&lt;div id="output"&gt;</code>.</p>
+            <pre>
+<code>
+let números = [1, 2, 3, 4, 5];
+
+números.push(6);              // Adiciona 6 ao final
+números.unshift(0);           // Adiciona 0 ao início
+números.pop();                // Remove o último (6)
+números.shift();              // Remove o primeiro (0)
+
+let pares = números.filter(n => n % 2 === 0); // Filtra números pares
+let dobrados = números.map(n => n * 2);       // Dobra cada número
+let soma = números.reduce((acc, n) => acc + n, 0); // Soma todos
+
+let temTres = números.includes(3); // Verifica se tem 3
+let índiceDois = números.indexOf(2); // Encontra o índice do 2
+let encontrado = números.find(n => n > 3); // Encontra o primeiro > 3
+
+let output = document.getElementById("output");
+output.innerHTML = `
+  Pares: ${pares.join(", ")}<br>
+  Dobrados: ${dobrados.join(", ")}<br>
+  Soma: ${soma}<br>
+  Tem 3: ${temTres}<br>
+  Índice do 2: ${indiceDois}<br>
+  Encontrado > 3: ${encontrado}
+`;
+</code>
+
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 150px; }
+    </style>
+</head>
+<body>
+    <h1>Manipulação de Arrays</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 150px;
+}
+'>Compilador</button>
+            </pre>
+        </section>
+
+        <section id="dom">
+            <h2>Manipulação do DOM</h2>
+            <p>O DOM (Document Object Model) é como um mapa da sua página HTML. Ele transforma os elementos (como botões e textos) em objetos que o JavaScript pode mudar, criando interatividade.</p>
+            <p><strong>Por que isso é útil?</strong> Você pode usar o DOM para mudar o texto de um título, esconder um menu, ou criar novos itens em uma lista de tarefas.</p>
+            
+            <h3>Selecionar Elementos</h3>
+            <p>Antes de mudar algo na página, você precisa selecionar o elemento. JavaScript oferece métodos como <code>getElementById</code> ou <code>querySelector</code> para encontrar elementos.</p>
+            <p><strong>Como funciona:</strong> O código usa diferentes métodos para selecionar elementos no DOM, como um <div> por ID, parágrafos por classe ou tag. O resultado mostra quantos elementos foram encontrados e seus conteúdos, exibidos no <code>&lt;div id="output"&gt;</code>.</p>
+            <pre>
+<code>
+const elemento = document.getElementById("meuId");
+const elementos = document.getElementsByClassName("minhaClasse");
+const tags = document.getElementsByTagName("p");
+
+const elemento2 = document.querySelector("#meuId");
+const elementos2 = document.querySelectorAll(".minhaClasse");
+const primeiroP = document.querySelector("p");
+const todosP = document.querySelectorAll("p");
+
+let output = document.getElementById("output");
+output.innerHTML = `
+  Elemento por ID: ${elemento.textContent}<br>
+  Elementos por classe: ${elementos.length} encontrados<br>
+  Tags p: ${tags.length}<br>
+  Query #meuId: ${elemento2.textContent}<br>
+  Query .minhaClasse: ${elementos2.length} encontrados<br>
+  Primeiro p: ${primeiroP.textContent}<br>
+  Todos p: ${todosP.length}
+`;
+</code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleção DOM</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #meuId { color: blue; }
+        .minhaClasse { background: #f0f0f0; padding: 5px; }
+        p { margin: 10px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 150px; }
+    </style>
+</head>
+<body>
+    <h1>Seleção de Elementos</h1>
+    <div id="meuId">Elemento por ID</div>
+    <p class="minhaClasse">Parágrafo 1</p>
+    <p class="minhaClasse">Parágrafo</p>
+    <2>p
+    <p>Parágrafo</p>3
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#meuId {
+  color: blue;
+}
+.minhaClasse {
+  background: #f0f0f0;
+  padding: 5px;
+}
+p {
+  margin: 10px;
+}
+#output {
+  {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 150px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Manipular Conteúdo</h3>
+            <p>Depois de selecionar um elemento, você pode mudar seu texto, adicionar HTML ou alterar atributos, como links ou IDs.
+            </p>
+            <p><strong>Como funciona:</strong> O código seleciona um <div> e altera seu texto, adiciona HTML em negrito, e muda sua classe e ID. O resultado é visível no elemento modificado, e uma mensagem é exibida no <code>&lt;div id="output"&gt;</code>.</p>
+            <pre>
+                <code>
+const elemento = document.getElementById("elemento");
+                    
+elemento.textContent = "Novo texto"; // Muda o texto visível
+elemento.innerHTML = "<strong>Texto em negrito</strong>"; // Adiciona HTML
+                    
+elemento.setAttribute("class", "nova-classe"); // Muda a classe
+elemento.id = "novoId"; // Muda o ID
+                    
+// Exibir resultado
+let output = document.getElementById("output");
+output.innerHTML = "Elemento alterado, veja acima!";
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulação de Conteúdo</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        #elemento { padding: 10px; border: 1px solid #ccc; }
+        .nova-classe { background: #e0e0e0e0; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Alterando Conteúdo</h1>
+    <div id="elemento">Texto original</div>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#elemento {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.nova-classe {
+  background: #e0e0e0;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>;
+';
+            </pre>
+
+            <h3>Manipular Estilos</h3>
+            <p>Você pode mudar a aparência de elementos, como cores ou tamanhos, usando CSS diretamente no JavaScript ou adicionando/removendo classes.</p>
+            <pre>
+                <code>
+const elemento = document.getElementById("elemento");
+elemento.style.color = "red"; // Muda a cor do texto
+elemento.style.backgroundColor = "yellow"; // Muda fundo
+elemento;
+// Manipular classes
+elemento.classList.add("nova-classe"); // Adiciona
+elemento.classList.toggle("ativo"); // Alterna classe
+// Exibir resultado
+let output = document.getElementById("output");
+output.innerHTML = `Classe 'ativo' presente: 
+${elemento.classList.contains("ativo")}`;
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Estilos DOM</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #elemento { padding: 10px; border: 1px solid #ccc; }
+        .nova-classe { background: #e0e0e0; }
+        .ativo { border: 2px solid green; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+}
+</head>
+<body>
+    <h1>Manipulação de Estilos</h1>
+    <div id="elemento">Elemento de teste</div>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#elemento {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.nova-classe {
+  background: #e0e0e0;
+}
+.ativo {
+  border: 2px solid green;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>;
+';
+            </pre>
+            <h3>Criar e Remover Elementos</h3>
+            <p>JavaScript permite criar novos elementos (como uma nova foto em uma galeria) ou remover elementos (como um item de carrinho).</p>
+            <p><strong>Como funciona:</strong> O código cria um parágrafo com <code>createElement</code>, define seu texto e classe, e o adiciona ao <code>body</code> com <code>appendChild</code></p> Uma mensagem é exibida no <code>&lt;div id="output"&gt;</code> para confirmar.</p>
+            <pre>
+                <code>
+const novoP = document.createElement("p"); // Cria um parágrafo
+novoP.textContent = "Novo parágrafo"; // Define texto
+novoP.className = "destaque"; // Adiciona classe
+
+document.body.appendChild(novoP); // Adiciona ao final do body
+
+let output = document.getElementById("output");
+output.innerHTML = "Novo parágrafo adicionado acima!";
+                </code>
+
+ <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Criação DOM</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .destaque { color: blue; font-weight: bold; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Criação de Elementos</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='s;
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+.destaque {
+  color: blue;
+  font-weight: bold;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>';
+            </pre>
+        </section>
+        <section id="eventos">
+            <h2>Gestão de Eventos</h2>
+            <p>Eventos são ações do usuário, como clicar em um botão ou digitar. O JavaScript pode "ouvir" esses eventos e responder, tornando a página interativa.</p>
+            <p><p><strong>Por que isso é útil?</strong> Em um site, você pode fazer um botão mostrar uma mensagem ou um formulário reagir quando preenchido.</p>
+            
+            <h3>Adicionar Eventos</h3>
+            <p>Usamos <code>addEventListener</code> para associar uma função a um evento, como um clique em um botão.</p>
+            <p><strong>Como funciona:</strong> O código seleciona um botão e adiciona um evento de clique com <code>AddEventListener</code>. Quando clicado, ele mostra uma mensagem no <code>&lt;div id="output"&gt;</code>. O HTML inclui um botão estilizado.</p> 
+            <pre>
+                <code>
+const botao = document.getElementById("meuBotao");
+                 
+// Adicionar evento de clique
+botao.addEventListener("click", function() {
+   let output = document.getElementById("output");
+  utput.innerHTML = "Botão clicado!";
+});
+                    
+// Exibir resultado inicial
+document.getElementById("output").innerHTML = "Clique no botão acima!";
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos</title>";
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #meuBotao { padding: 10px 20px; background: #3498db; color: white; border: none; cursor: pointer; }
+        #meuBotao:hover { background: #2980b9b9; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Eventos de Clique</h1>
+    <button id="meuBotao">Clique aqui</button>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='s
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#meuBotao {
+  padding: 10px 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#meuBotao:hover {
+  background: #2980b9;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>';
+            </pre>
+
+            <h3>Objeto Event</h3>
+            <p>O objeto <code>Event</code> contém detalhes sobre o evento, como o tipo (clique, tecla) e onde aconteceu.</p>
+            <p><strong>Como funciona:</strong> O código usa delegação de eventos para capturar cliques em botões com classe <code>.botao</code>. O objeto <code>event</code> mostra o tipo de evento, o texto do botão, e a posição do clique. Os resultados aparecem no <code>&lt;div id="output"&gt;</code>.</p>
+                
+            <pre>
+                <code>
+function handleClick(event) {
+  let output = document.getElementById("output");
+  output.innerHTML = `
+    Tipo: ${event.type}<br>
+    Botão: ${event.target.textContent}<br>
+    Posição: ${event.clientX}, ${event.clientY}
+    `;
+}
+
+document.querySelectorAll(".botao").forEach(botao => {
+  botao.addEventListener("click", handleClick);
+});
+
+document.getElementById("output").innerHTML = 
+"Clique em um botão para ver detalhes!";
+                </code>;
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Objeto Event</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        .botao { margin: 5px; padding: 10px; background: #3498db; color: white; border: none; cursor: pointer; }
+        .botao:hover { background: #2980b9; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 100px; }
+    </style>
+</head>
+<body>
+    <h1>Detalhes do Evento</h1>
+    <button class="botao">Botão 1</button>
+    <button class="botao">Botão 2</button>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+.botao {
+  margin: 5px;
+  padding: 10px;
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.botao:hover {
+  background: #2980b9;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 100px;
+}
+'>Compilador</button>';
+            </pre>
+
+            <h3>Formulários</h3>
+            <p>Formulários são comuns em sites, e JavaScript pode validar dados ou processá-los antes de enviar.</p>
+            <p><strong>Como funciona:</strong> O código captura o envio de um formulário, impede o recarregamento com <code>preventDefault</code>, e valida os campos. O evento <code>input</code> verifica o email em tempo real, mudando a borda do campo. Os resultados são exibidos no <code>&lt;div id="output"&gt;</code>.</p>  
+            <pre>
+                <code>
+const formulario = document.getElementById("meuFormulario");
+
+formulario.addEventListener("submit", function(event) {
+    event.preventDefault();
+    let nome = document.getElementById("nome").value;
+    let email = document.getElementById("email").value;
+    let output = document.getElementById("output");
+    if (!nome || !email) {
+        output.innerHTML = "Preencha todos os campos!";
+        return;
+    }
+    output.innerHTML = `Nome: ${nome}<br>Email: ${email}`;
+});
+
+document.getElementById("email").addEventListener("input", function() {
+    let email = this.value;
+    let isValid = email.includes("@");
+    this.style.borderColor = isValid ? "green" : "red";
+});
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #meuFormulario { padding: 20px; background: #f8f8f8; border-radius: 5px; }
+        label { display: block; margin: 10px 0 5px; }
+        input { padding: 5px; width: 100%; max-width: 200px; border: 1px solid #ccc; }
+        button { padding: 10px; background: #3498db; color: white; border: none; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; margin-top: 10px; }
+    </style>
+</head>
+<html>
+<body>
+    <h1>Formulário Interativo</h1>
+    <form id="meuFormulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome">
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#meuFormulario {
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 5px;
+}
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+input {
+  padding: 5px;
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid #ccc;
+}
+button {
+  padding: 10px;
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #2980b9;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+  margin-top: 10px;
+}
+'>Compilador</button>';
+            </pre>
+        </section>
+        <section id="async">
+            <h2>Programação Assíncrona</h2>
+            <p>JavaScript pode esperar por tarefas que levam tempo, como carregar dados de um servidor, sem travar a página. Isso é feito com callbacks, Promises, ou async/await.</p>
+            <p><strong>Por que isso é útil?</strong> Em um site de redes sociais, você pode carregar posts enquanto o usuário continua navegando.</p>
+            
+            <h3>Callbacks</h3>
+            <p>Callbacks são funções passadas como argumentos para outras funções, executadas quando a tarefa termina.</p>
+            <p><strong>Como funciona:</strong> A função <code>carregarDados</code> simula uma espera çıra de 2 segundos com <code> setTimeout</code> e chama o callback com dados fictícios. O resultado aparece no <code>&lt;div id="output"&gt;</code> após a espera.</p>
+                
+            <pre>
+                <code>
+function carregarDados(callback) {
+    setTimeout(() => {
+        const dados = { id: 1, nome: "João" };
+        callback(dados); // Executa após 2s
+    }, 2000);
+}
+
+carregarDados(function(dados) {
+    let output = document.getElementById("output");
+    output.innerHTML = `Dados: ID: ${dados.id}, Nome: ${dados.nome}`;
+});
+
+document.getElementById("output").innerHTML = "Aguarde 2s...";
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Callbacks</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Callbacks</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>';
+            </pre>
+
+            <h3>Promises</h3>
+            <p>Promises são objetos que representam um valor futuro, com estados de sucesso ou erro.</p>
+            <p><strong>Como funciona:</strong> A Promise simula uma tarefa que pode ter sucesso ou falhar. O método <code>then</code> lida com o sucesso, <code>catch</code> com erros, e <code>finally</code> sempre executa. O resultado aparece no <code>&lt;div id="output"&gt;</code>.</p>
+                
+            <pre>
+                <code>
+function carregarDados() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const sucesso = Math.random() > 0.5;
+            if (sucesso) {
+                resolve({ id: 1, nome: "João" });
+            } else {
+                reject(new Error("Falha ao carregar"));
+            }
+        }, 2000);
+    });
+}
+
+carregarDados()
+    .then(dados => {
+        let output = document.getElementById("output");
+        output.innerHTML = `Dados: ${dados.id}, ${dados.nome}`;
+    })
+    .catch(erro => {
+        let output = document.getElementById("output");
+        output.innerHTML = `Erro: ${erro.message}`;
+    })
+    .finally(() => {
+        let output = document.getElementById("output");
+        output.innerHTML += `<br>Concluído`;
+    });
+
+document.getElementById("output").innerHTML = "Aguarde 2s...";
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Promises</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 100px; }
+    </style>
+</head>
+<body>
+    <h1>Promises</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 100px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Async/Await</h3>
+            <p>Async/await é uma forma mais clara de usar Promises, como se fosse código normal.</p>
+            <p><strong>Como funciona:</strong> A função <code>async</code> usa <code>await</code> para esperar a Promise resolver. O resultado ou erro aparece no <code>&lt;div id="output"&gt;</code> após 1 segundo.</p>
+                
+            <pre>
+                <code>
+async function carregarDados() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve({ id: 1, nome: "João" }), 1000);
+    });
+}
+
+async function processar() {
+    let output = document.getElementById("output");
+    try {
+        const dados = await carregarDados();
+        output.innerHTML = `Dados: ${dados.id}, ${dados.nome}`;
+    } catch (erro) {
+        output.innerHTML = `Erro: ${erro.message}`;
+    }
+}
+
+processar();
+document.getElementById("output").innerHTML = "Aguarde 1s...";
+                </code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Async/Await</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Async/Await</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Fetch API</h3>
+            <p>A Fetch API faz requisições HTTP, como buscar dados de um servidor.</p>
+            <p><strong>Como funciona:</strong> O código usa <code>fetch</code> para buscar dados de uma API pública. O resultado ou erro aparece no <code>&lt;div id="output"&gt;</code>.</p>
+            <pre>
+                <code>
+async function obterDados() {
+    let output = document.getElementById("output");
+    try {
+        const response = await fetch
+        ("https://jsonplaceholder.typicode.com/todos/1");
+        const dados = await response.json();
+        output.innerHTML = `Título: ${dados.title}`;
+    } catch (error) {
+        output.innerHTML = `Erro: ${error.message}`;
+    }
+}
+
+obterDados();
+document.getElementById("output").innerHTML = "Carregando...";
+                </code>
+<button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Fetch API</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>
+            </pre>
+        </section>
+
+        <section id="apis">
+            <h2>APIs Web Modernas</h2>
+            <p>Os navegadores oferecem APIs que expandem o JavaScript, permitindo interagir com recursos do dispositivo, como armazenamento ou localização.</p>
+            <p><strong>Por que isso é útil?</strong> Você pode salvar preferências do usuário, mostrar a localização em um mapa, ou enviar notificações.</p>
+            
+            <h3>Local Storage</h3>
+            <p>Local Storage guarda dados no navegador, mesmo após fechar o site.</p>
+            <p><strong>Como funciona:</strong> O código salva e lê dados com <code>localStorage</code>. Objetos são convertidos com JSON. O resultado aparece no <code>&lt;div id="output"&gt;</code>.</p>
+                
+            <pre>
+                <code>
+localStorage.setItem("usuario", "João");
+localStorage.setItem("config", JSON.stringify({ tema: "escuro" }));
+
+const usuario = localStorage.getItem("usuario");
+const config = JSON.parse(localStorage.getItem("config"));
+
+let output = document.getElementById("output");
+output.innerHTML = `
+  Usuário: ${usuario}<br>
+  Config: ${config.tema}
+`;
+                </code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Storage</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Local Storage</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Geolocation</h3>
+            <p>A API Geolocation obtém a localização do usuário, com permissão.</p>
+            <p><strong>Como funciona:</strong> O código verifica se a geolocalização está disponível e solicita a localização. O resultado ou erro aparece no <code>&lt;div id="output"&gt;</code>. Nota: Requer HTTPS ou localhost.</p>
+            <pre>
+                <code>
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            let output = document.getElementById("output");
+            output.innerHTML = `Latitude: ${position.coords.latitude}, 
+            Longitude: ${position.coords.longitude}`;
+        },
+        error => {
+            let output = document.getElementById("output");
+            output.innerHTML = `Erro: ${error.message}`;
+        }
+    );
+} else {
+    let output = document.getElementById("output");
+    output.innerHTML = "Geolocalização não suportada";
+}
+document.getElementById("output").innerHTML = "Carregando...";
+                </code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocation</title>
+    <style>
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        #output { padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Geolocalização</h1>
+    <div id="output"></div>
+</body>
+</html>
+' data-css='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>
+            </pre>
+
+            <h3>Intersection Observer</h3>
+            <p>Intersection Observer detecta quando elementos entram na tela.</p>
+            <p><strong>Como funciona:</strong> O código observa elementos com a classe <code>.elemento</code>. Quando visíveis, adiciona uma classe e exibe uma mensagem no <code>&lt;div id="output"&gt;</code>.</p><p><strong>Como funciona:</strong> O código observa elementos com classe <code>.elemento</code> e adiciona uma classe quando visíveis. O resultado aparece no <code>&lt;div id="output"&gt;</code>. Note que os elementos têm margem grande para simular scroll.</p>
+            <pre>
+                <code>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visivel");
+            let output = document.getElementById("output");
+            output.innerHTML = `${entry.target.textContent} visível`;
+        }
+    });
+});
+document.querySelectorAll(".elemento").forEach(el => o
+bserver.observe(el));
+                </code>
+                <button class="compile-btn" data-html='
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Intersection Observer</title>
+    <style>
+        body {
+        body { font-family: "Inter", sans-serif; text-align: center; padding: 20px; }
+        .elemento {
+        .margin: 200px 0; padding: 10px; border: 1px solid #ccc; }
+        .visivel {
+        .background: yellow; }
+        #output {
+        .padding: padding: 15px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 5px; min-height: 50px; }
+    }
+    </style>
+</head>
+<body>
+    <h1>Intersection Observer</h1>
+    <div class="elemento">Elemento 1</div>
+    <div class="elemento">Elemento 2</div>
+    <div id="output"></div>
+</body>
+</html>
+' data-html='
+body {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+.elemento {
+  margin: 200px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.visivel {
+  background: yellow;
+}
+#output {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+  min-height: 50px;
+}
+'>Compilador</button>
+            </pre>
+        </section>
+    </main>
+    <footer class="main-footer">
+        <p>© 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+        <p>José Lamelas | João Rio</p>
+    </footer>
+</body>
+</html>

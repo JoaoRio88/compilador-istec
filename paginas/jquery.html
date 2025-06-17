@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial jQuery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../script_darkmode.js"></script>
+    <script src="script.js"></script>
+</head>
+<body class="light-mode">
+    <header class="main-header">
+        <h1>Tutorial jQuery</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#instalacao">Instalação</a></li>
+                <li><a href="#seletores">Seletores</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#efeitos">Efeitos</a></li>
+                <li><a href="#ajax">AJAX</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section id="introducao">
+            <h2>O que é jQuery?</h2>
+            <p>jQuery é uma biblioteca JavaScript rápida, leve e rica em recursos, projetada para simplificar a manipulação do DOM, o manejo de eventos, animações e requisições AJAX em páginas web. Seu lema é "escreva menos, faça mais".</p>
+            <h3>Características Principais:</h3>
+            <ul>
+                <li>Seletores poderosos: Encontre elementos HTML facilmente</li>
+                <li>Manipulação do DOM: Altere conteúdo e estrutura com simplicidade</li>
+                <li>Gestão de eventos: Lide com cliques, teclas e mais</li>
+                <li>Efeitos e animações: Adicione transições suaves</li>
+                <li>AJAX simplificado: Carregue dados sem recarregar a página</li>
+                <li>Cross-browser: Funciona consistentemente em todos os navegadores</li>
+            </ul>
+            <h3>Por que usar jQuery?</h3>
+            <ul>
+                <li>Sintaxe simples e intuitiva</li>
+                <li>Reduz código JavaScript nativo complexo</li>
+                <li>Grande comunidade e plugins disponíveis</li>
+                <li>Compatível com projetos web modernos</li>
+            </ul>
+            <p>Empresas como WordPress, IBM e Microsoft já usaram jQuery em projetos, embora o JavaScript moderno (ES6+) tenha substituído algumas de suas funções.</p>
+        </section>
+
+        <section id="instalacao">
+            <h2>Instalação e Setup</h2>
+            <h3>Como Incluir jQuery:</h3>
+            <ul>
+                <li>CDN (recomendado): Carregue diretamente de servidores como jQuery CDN</li>
+                <li>Download: Baixe o arquivo e hospede localmente</li>
+                <li>NPM: Instale para projetos com build tools</li>
+            </ul>
+            <h3>Usando CDN:</h3>
+            <pre>
+                <code>
+// Adicione no <head> do HTML
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+// Verifique se jQuery está carregado
+$(document).ready(function() {
+    console.log('jQuery versão: ' + jQuery.fn.jquery);
+    // Exibe: jQuery versão: 3.6.0
+});
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <h3>Download Local:</h3>
+            <pre>
+                <code>
+// Baixe de jquery.com e inclua
+<script src="path/to/jquery-3.6.0.min.js"></script>
+
+// Teste de carregamento
+$(function() {
+    alert('jQuery está pronto!');
+});
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <h3>NPM para Projetos Modernos:</h3>
+            <pre>
+                <code>
+# Instalar via NPM
+npm install jquery
+
+// Importar em seu JavaScript
+const $ = require('jquery');
+
+// Usar após carregar
+$(document).ready(function() {
+    console.log('jQuery carregado via NPM!');
+});
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <p>Dica: Use $(document).ready() para garantir que o DOM esteja carregado antes de executar o código jQuery.</p>
+        </section>
+
+        <section id="seletores">
+            <h2>Seletores jQuery</h2>
+            <p>Seletores permitem encontrar e manipular elementos HTML com base em ID, classe, tipo, atributos e mais, usando uma sintaxe semelhante ao CSS.</p>
+            <h3>Seletores Básicos:</h3>
+            <pre>
+                <code>
+// Seletor por ID
+$('#meuId').css('color', 'blue'); // Elemento com id="meuId"
+
+// Seletor por classe
+$('.minhaClasse').hide(); // Todos os elementos com class="minhaClasse"
+
+// Seletor por elemento
+$('p').text('Novo texto!'); // Todos os parágrafos
+
+// Seletor por atributo
+$('input[type="text"]').val('Digite aqui'); // Inputs do tipo texto
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <h3>Seletores Avançados:</h3>
+            <pre>
+                <code>
+// Combinações
+$('div.minhaClasse').css('background', 'yellow'); // Divs com classe específica
+
+// Filhos e descendentes
+$('#container > p').css('font-weight', 'bold'); // Filhos diretos
+$('#container p').css('margin', '10px'); // Todos os descendentes
+
+// Filtros
+$('li:first').css('color', 'red'); // Primeiro item da lista
+$('li:odd').css('background', 'lightgray'); // Items ímpares
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <p>Dica: Teste seletores no console do navegador para verificar quais elementos são afetados!</p>
+        </section>
+
+        <section id="eventos">
+            <h2>Eventos com jQuery</h2>
+            <p>jQuery simplifica o manejo de eventos como cliques, teclas, mouse e formulários, com métodos fáceis de usar.</p>
+            <h3>Eventos Comuns:</h3>
+            <pre>
+                <code>
+// Clique
+$('#meuBotao').click(function() {
+    alert('Botão clicado!');
+});
+
+// Mouseover e Mouseout
+$('.elemento').hover(
+    function() { $(this).css('background', 'yellow'); }, // mouseover
+    function() { $(this).css('background', ''); } // mouseout
+);
+
+// Teclado
+$('input').keyup(function(e) {
+    console.log('Tecla pressionada: ' + e.key);
+});
+
+// Submissão de formulário
+$('form').submit(function(e) {
+    e.preventDefault(); // Impede o envio padrão
+    console.log('Formulário submetido!');
+});
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <h3>Delegação de Eventos:</h3>
+            <pre>
+                <code>
+// Eventos em elementos dinâmicos
+$('#container').on('click', 'button', function() {
+    $(this).text('Clicado!');
+});
+
+// Múltiplos eventos
+$('.item').on({
+    click: function() { $(this).toggleClass('ativo'); },
+    mouseenter: function() { $(this).css('color', 'blue'); },
+    mouseleave: function() { $(this).css('color', ''); }
+});
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <p>Dica: Use e.preventDefault() para evitar comportamentos padrão, como recarregar a página em formulários.</p>
+        </section>
+
+        <section id="efeitos">
+            <h2>Efeitos e Animações</h2>
+            <p>jQuery oferece métodos para criar efeitos visuais e animações, tornando as páginas mais interativas.</p>
+            <h3>Efeitos Básicos:</h3>
+            <pre>
+                <code>
+// Esconder e mostrar
+$('#elemento').hide(); // Esconde
+$('#elemento').show(); // Mostra
+$('#elemento').toggle(); // Alterna visibilidade
+
+// Fade
+$('#elemento').fadeOut(1000); // Desaparece em 1 segundo
+$('#elemento').fadeIn(1000); // Aparece em 1 segundo
+$('#elemento').fadeToggle(500); // Alterna com fade
+
+// Slide
+$('#elemento').slideUp(800); // Recolhe
+$('#elemento').slideDown(800); // Expande
+$('#elemento').slideToggle(800); // Alterna
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <h3>Animações Personalizadas:</h3>
+            <pre>
+                <code>
+// Animação com propriedades CSS
+$('#elemento').animate({
+    width: '200px',
+    opacity: 0.5,
+    marginLeft: '50px'
+}, 1000, function() {
+    console.log('Animação concluída!');
+});
+
+// Encadeamento de efeitos
+$('#elemento')
+    .slideUp(500)
+    .delay(1000)
+    .slideDown(500)
+    .css('background', 'lightblue');
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <p>Dica: O parâmetro de duração (em milissegundos) controla a velocidade, e a função de callback executa após o efeito.</p>
+        </section>
+
+        <section id="ajax">
+            <h2>AJAX com jQuery</h2>
+            <p>AJAX permite carregar dados do servidor sem recarregar a página, e o jQuery simplifica isso com métodos poderosos.</p>
+            <h3>Requisições Básicas:</h3>
+            <pre>
+                <code>
+// GET simples
+$.get('https://api.exemplo.com/dados', function(data) {
+    $('#resultado').text(JSON.stringify(data));
+});
+
+// POST simples
+$.post('https://api.exemplo.com/enviar', { nome: 'João' }, function(data) {
+    console.log('Resposta do servidor: ', data);
+});
+
+// Tratar erros
+$.get('https://api.exemplo.com/dados')
+    .done(function(data) {
+        $('#resultado').html('Dados: ' + JSON.stringify(data));
+    })
+    .fail(function() {
+        $('#resultado').html('Erro ao carregar dados!');
+    });
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <h3>Método $.ajax Completo:</h3>
+            <pre>
+                <code>
+// Requisição AJAX completa
+$.ajax({
+    url: 'https://api.exemplo.com/usuarios',
+    method: 'POST',
+    data: {
+        nome: 'Maria',
+        email: 'maria@email.com'
+    },
+    dataType: 'json',
+    success: function(response) {
+        $('#resultado').html('Sucesso: ' + response.message);
+    },
+    error: function(xhr, status, error) {
+        $('#resultado').html('Erro: ' + error);
+    },
+    beforeSend: function() {
+        $('#resultado').html('Carregando...');
+    },
+    complete: function() {
+        console.log('Requisição concluída!');
+    }
+});
+                </code>
+                <button class="compile-btn" data-type="js">Compilador</button>
+            </pre>
+            <p>Dica: Use APIs públicas como jsonplaceholder.typicode.com para testar requisições AJAX com segurança.</p>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+        <p>José Lamelas | João Rio</p>
+    </footer>
+</body>
+</html>

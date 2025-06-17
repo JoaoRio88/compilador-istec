@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tutorial sobre fundamentos do HTML para iniciantes">
+    <title>Fundamentos do HTML</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../script_darkmode.js"></script>
+    <script src="script.js"></script>
+    <script src="projetos_script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <h1>Fundamentos do HTML</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#definicao">Definição</a></li>
+                <li><a href="#tags">Tags Principais</a></li>
+                <li><a href="#estrutura">Estrutura</a></li>
+                <li><a href="#semanticas">Tags Semânticas</a></li>
+                <li><a href="#tabelas">Tabelas</a></li>
+                <li><a href="#formularios">Formulários</a></li>
+                <li><a href="#multimédia">Multimédia</a></li>
+                <li><a href="#video">Vídeo</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="content">
+        <section id="definicao">
+            <h2>O que é HTML?</h2>
+            <p>HTML (HyperText Markup Language) é a linguagem padrão para criar páginas web. Ela usa <strong>tags</strong> para estruturar conteúdo, como textos, imagens e links, permitindo que navegadores exibam páginas de forma organizada.</p>
+            <p>O HTML5, a versão mais recente, trouxe recursos como suporte a vídeos, formulários avançados e melhor acessibilidade. É fácil de aprender e essencial para desenvolvimento web.</p>
+            <h3>Por que aprender HTML?</h3>
+            <ul>
+                <li>Base para criar sites</li>
+                <li>Compatível com todos os navegadores modernos</li>
+                <li>Suporta interatividade com CSS e JavaScript</li>
+            </ul>
+        </section>
+
+        <section id="tags">
+            <h2>Tags Principais</h2>
+            <p>As tags HTML são blocos de construção que definem a estrutura e o conteúdo de uma página. Aqui estão algumas das mais importantes:</p>
+            <h3>Tags de Estrutura</h3>
+            <ul>
+                <li><code>&lt;html&gt;</code>: Raiz do documento</li>
+                <li><code>&lt;head&gt;</code>: Metadados (não visíveis)</li>
+                <li><code>&lt;body&gt;</code>: Conteúdo visível</li>
+            </ul>
+            <h3>Tags de Conteúdo</h3>
+            <ul>
+                <li><code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>: Títulos</li>
+                <li><code>&lt;p&gt;</code>: Parágrafos</li>
+                <li><code>&lt;a&gt;</code>: Links</li>
+                <li><code>&lt;img&gt;</code>: Imagens</li>
+            </ul>
+            <h3>Exemplo de Código</h3>
+            <pre data-type="html"><code>&lt;h1&gt;Meu Título&lt;/h1&gt;
+&lt;p&gt;Este é um parágrafo com um &lt;a href="https://istec-porto.pt"&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;img src="https://istec-porto.pt/wp-content/uploads/2020/01/beAsset-1logo.png" alt="Descrição da imagem"&gt;</code><button class="compile-btn">Compilador</button></pre>
+        </section>
+
+        <section id="estrutura">
+            <h2>Estrutura Básica</h2>
+            <p>Todo documento HTML segue uma estrutura padrão para garantir que o navegador o interprete corretamente. Veja o exemplo abaixo:</p>
+            <pre data-type="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Minha Página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bem-vindo!&lt;/h1&gt;
+    &lt;p&gt;Esta é uma página simples.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code><button class="compile-btn">Compilador</button></pre>
+            <p><strong>Explicação:</strong></p>
+            <ul>
+                <li><code>&lt;!DOCTYPE html&gt;</code>: Indica que é HTML5</li>
+                <li><code>lang="pt"</code>: Define o idioma como português</li>
+                <li><code>&lt;meta charset="UTF-8"&gt;</code>: Suporta caracteres especiais</li>
+            </ul>
+        </section>
+
+        <section id="semanticas">
+            <h2>Tags Semânticas</h2>
+            <p>Tags semânticas dão significado ao conteúdo, melhorando acessibilidade e SEO. Exemplos incluem:</p>
+            <ul>
+                <li><code>&lt;header&gt;</code>: Cabeçalho</li>
+                <li><code>&lt;nav&gt;</code>: Navegação</li>
+                <li><code>&lt;main&gt;</code>: Conteúdo principal</li>
+                <li><code>&lt;footer&gt;</code>: Rodapé</li>
+            </ul>
+            <h3>Exemplo Semântico</h3>
+            <pre data-type="html"><code>&lt;header&gt;
+    &lt;h1&gt;Título do Site&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#home"&gt;Início&lt;/a&gt;&lt;/li&gt;
+        &lt;ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Meu Artigo&lt;/h2&gt;
+        &lt;p&gt;Conteúdo aqui...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+    &lt;p&gt;© 2024 Meu Site&lt;/p&gt;
+&lt;/footer&gt;</code><button class="compile-btn">Compilador</button></pre>
+        </section>
+
+        <section id="tabelas">
+            <h2>Tabelas HTML</h2>
+            <p>As tabelas HTML são usadas para exibir dados em formato tabular, como listas ou relatórios. Elas utilizam tags específicas para estruturar linhas e colunas.</p>
+            <h3>Tags de Tabelas</h3>
+            <ul>
+                <li><code>&lt;table&gt;</code>: Define a tabela</li>
+                <li><code>&lt;tr&gt;</code>: Define uma linha</li>
+                <li><code>&lt;th&gt;</code>: Define um cabeçalho de coluna</li>
+                <li><code>&lt;td&gt;</code>: Define uma célula de dados</li>
+            </ul>
+            <h3>Exemplo de Tabela</h3>
+            <pre data-type="html"><code>&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Nome&lt;/th&gt;
+        &lt;th&gt;Idade&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;João&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Maria&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code><button class="compile-btn">Compilador</button></pre>
+            <p><strong>Dica:</strong> Use o atributo <code>border="1"</code> para visualizar as bordas da tabela. Para estilização avançada, use CSS.</p>
+        </section>
+
+        <section id="formularios">
+            <h2>Formulários HTML</h2>
+            <p>Formulários coletam dados dos usuários, como nomes ou emails. O HTML5 adicionou novos tipos de input para facilitar a validação.</p>
+            <h3>Exemplo de Formulário</h3>
+            <pre data-type="html"><code>&lt;form&gt;
+    &lt;label for="nome"&gt;Nome:&lt;/label&gt;
+    &lt;input type="text" id="nome" name="nome" required&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required&gt;
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code><button class="compile-btn">Compilador</button></pre>
+            <p><strong>Dica:</strong> Use <code>required</code> para tornar campos obrigatórios.</p>
+        </section>
+
+        <section id="multimédia">
+            <h2>Elementos Multimédia</h2>
+            <p>HTML5 suporta áudio, vídeo e imagens responsivas sem plugins externos.</p>
+            <h3>Exemplo de Vídeo</h3>
+            <pre data-type="html"><code>&lt;video controls&gt;
+    &lt;source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"&gt;
+    Vídeo não suportado.
+&lt;/video&gt;</code><button class="compile-btn">Compilador</button></pre>
+            <h3>Exemplo de Imagem Responsiva</h3>
+            <pre data-type="html"><code>&lt;picture&gt;
+    &lt;source media="(min-width: 800px)" srcset="https://via.placeholder.com/800x400"&gt;
+    &lt;img src="https://via.placeholder.com/400x200" alt="Descrição"&gt;
+&lt;/picture&gt;</code><button class="compile-btn">Compilador</button></pre>
+        </section>
+
+        <section id="video">
+            <h2>Recurso Adicional</h2>
+            <p>Assista ao vídeo abaixo para aprofundar seus conhecimentos em HTML:</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/5Hn58p-hYC0" title="Tutorial HTML" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>© 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+        <p>José Lamelas | João Rio</p>
+    </footer>
+</body>
+</html>

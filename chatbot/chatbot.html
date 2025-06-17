@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChatBot - Assistente Virtual</title>
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="chatbot.css" />
+  <script src="chatbot.js"></script>
+</head>
+<body>
+  <div class="chatbot-standalone">
+    <div class="chatbot-header">
+      <h2><i class="bx bx-bot"></i> Assistente Virtual</h2>
+    </div>
+    
+    <div class="chatbot-content">
+      <div class="bot-type-selector">
+        <label for="bot-type">Escolha o tipo de assistente:</label>
+        <select id="bot-type">
+          <option value="ajudante">🔧 Ajudante de Programação</option>
+          <option value="explicador">📖 Explicador de Código</option>
+          <option value="motivador">💪 Coach Motivacional</option>
+        </select>
+      </div>
+
+      <div id="chat-log"></div>
+
+      <div class="chat-input-container">
+        <input type="text" id="user-input" placeholder="Escreva sua pergunta aqui..." />
+        <button onclick="sendMessage()" id="send-btn">
+          <i class="bx bx-send"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+	
+</body>
+</html>

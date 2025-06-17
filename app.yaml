@@ -1,0 +1,21 @@
+runtime: nodejs20
+
+env_variables:
+  NODE_ENV: "production"
+  GOOGLE_CLIENT_ID: "1079118207496-tafsno6uujj84qf589us3u09ik8f0kfg.apps.googleusercontent.com"
+  GOOGLE_CLIENT_SECRET: "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"
+  GEMINI_API_KEY: "AIzaSyCrK_kBOTVezxOutl2lLzIuMTd7fbUDOuE"
+  SESSION_SECRET: "compilador_istec_secret_key_2024"
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
+# Configurações adicionais
+skip_files:
+  - ^(.*/)?#.*#$
+  - ^(.*/)?.*~$
+  - ^(.*/)?.*\.py[co]$
+  - ^(.*/)?.*/RCS/.*$
+  - ^(.*/)?\..*$
+  - ^(.*/)?node_modules/.*$

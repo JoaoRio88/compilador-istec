@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-PT" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Compilador para Iniciantes</title>
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="chatbot/chatbot.css" />
+    <link rel="stylesheet" href="compilador/style_compilador.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="card2" role="navigation" aria-label="Menu secundário">
+      <div class="card2Top">
+        <ul class="first-nav-list">
+          <li>
+            <button id="theme-toggle" aria-label="Alternar tema claro/escuro">
+              <i class="bx bx-moon"></i>
+              <span class="tooltip">Alternar Tema</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="card2Bottom">
+        <ul class="first-nav-list">
+          <li>
+            <a href="#" onclick="carregarConteudo('donativo/donativo.html')" aria-label="Doação">
+              <i class="bx bx-donate-heart"></i>
+              <span class="links_name">Doação</span>
+              <span class="tooltip">Doação</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="carregarConteudo('contacto/contacto.html')" aria-label="Contato">
+              <i class="bx bx-user"></i>
+              <span class="links_name">Contato</span>
+              <span class="tooltip">Contato</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar" aria-label="Menu principal">
+      <div class="logo-details">
+        <i class="bx bxl-c-plus-plus icon" aria-hidden="true"></i>
+        <div class="logo_name">Compilador</div>
+        <i class="bx bx-menu" id="btn" aria-label="Abrir/Fechar menu"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="#" onclick="carregarConteudo('compilador/compilador.html')" aria-label="Compilador">
+            <i class="bx bx-code"></i>
+            <span class="links_name">Compilador</span>
+            <span class="tooltip">Compilador</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="carregarConteudo('paginas/html.html')" aria-label="HTML">
+            <i class="bx bxl-html5"></i>
+            <span class="links_name">HTML</span>
+            <span class="tooltip">HTML</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="carregarConteudo('paginas/css.html')" aria-label="CSS">
+            <i class="bx bxl-css3"></i>
+            <span class="links_name">CSS</span>
+            <span class="tooltip">CSS</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="carregarConteudo('paginas/js.html')" aria-label="JavaScript">
+            <i class="bx bxl-javascript"></i>
+            <span class="links_name">JS</span>
+            <span class="tooltip">JS</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="carregarConteudo('paginas/jquery.html')" aria-label="jQuery">
+            <i class="bx bxl-jquery"></i>
+            <span class="links_name">jQuery</span>
+            <span class="tooltip">jQuery</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="carregarConteudo('paginas/nodejs.html')" aria-label="Node.js">
+            <i class="bx bxl-nodejs"></i>
+            <span class="links_name">Node.js</span>
+            <span class="tooltip">Node.js</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="carregarConteudo('paginas/projetos.html')" aria-label="Projetos">
+            <i class="bx bx-folder"></i>
+            <span class="links_name">Projetos</span>
+            <span class="tooltip">Projetos</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <iframe id="conteudo-frame" src="compilador/compilador.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+    </section>
+    <button class="chatbot-float-btn" id="chatbot-btn" onclick="toggleChatbot()" aria-label="Abrir/Fechar chatbot">
+      <i class='bx bx-message-dots'></i>
+    </button>
+    <div class="chatbot-container" id="chatbot-container" role="dialog" aria-label="Chatbot">
+      <div class="chatbot-header">
+        <h3><i class='bx bx-bot'></i> Assistente Virtual</h3>
+        <div class="chatbot-header-buttons">
+          <button class="chatbot-maximize" id="maximize-btn" title="Maximizar" onclick="toggleMaximizeChatbot()" aria-label="Maximizar chatbot">
+            <i class='bx bx-fullscreen'></i>
+          </button>
+          <button class="chatbot-close" onclick="closeChatbot()" aria-label="Fechar chatbot">
+            <i class='bx bx-x'></i>
+          </button>
+        </div>
+      </div>
+      <div class="chatbot-content">
+        <div class="bot-type-selector">
+          <label for="bot-type-float">Escolha o assistente:</label>
+          <select id="bot-type-float">
+            <option value="ajudante">🔧 Ajudante de Programação</option>
+            <option value="explicador">📖 Explicador de Código</option>
+            <option value="motivador">💪 Coach Motivacional</option>
+          </select>
+        </div>
+        <div id="chat-log-float"></div>
+        <div class="chat-input-container">
+          <input type="text" id="user-input-float" placeholder="Digite sua mensagem..." aria-label="Digite sua mensagem">
+          <button id="send-btn-float" aria-label="Enviar mensagem"><i class='bx bx-send'></i></button>
+        </div>
+      </div>
+    </div>
+    <div id="audio-player">
+      <div id="audio-controls">
+        <button id="prev-track" title="Anterior" aria-label="Música anterior"><i class='bx bx-skip-previous'></i></button>
+        <button id="play-pause" title="Play" aria-label="Tocar/Pausar"><i class='bx bx-play'></i></button>
+        <button id="stop" title="Stop" aria-label="Parar"><i class='bx bx-stop'></i></button>
+        <button id="next-track" title="Próxima" aria-label="Próxima música"><i class='bx bx-skip-next'></i></button>
+      </div>
+      <div id="track-name">Nenhuma música</div>
+      <audio id="audio-element" preload="auto"></audio>
+    </div>
+    <script src="script.js"></script>
+    <script src="compilador/script_compilador.js"></script>
+    <script src="script_darkmode.js"></script>
+    <script src="chatbot/floating-chatbot.js"></script>
+    <script src="auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Node.js</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../script_darkmode.js"></script>
+    <script src="script.js"></script>
+</head>
+<body class="light-mode">
+    <header class="main-header">
+        <h1>Tutorial Node.js</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#instalacao">Instalação</a></li>
+                <li><a href="#modulos">Módulos</a></li>
+                <li><a href="#express">Express.js</a></li>
+                <li><a href="#apis">APIs REST</a></li>
+                <li><a href="#banco-dados">Base de Dados</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section id="introducao">
+            <h2>O que é Node.js?</h2>
+            <p>Node.js é um ambiente de execução JavaScript do lado do servidor, construído sobre o motor V8 do Google Chrome. Permite usar JavaScript para criar aplicações backend, APIs, serviços web e muito mais.</p>
+            <h3>Características Principais:</h3>
+            <ul>
+                <li>Assíncrono e Orientado a Eventos: Ideal para aplicações I/O intensivas</li>
+                <li>Single-threaded: Usa um loop de eventos para lidar com concorrência</li>
+                <li>NPM: Maior repositório de bibliotecas do mundo</li>
+                <li>Cross-platform: Funciona em Windows, macOS e Linux</li>
+                <li>Fast: Baseado no motor V8, muito rápido</li>
+                <li>Escalável: Ideal para aplicações em tempo real</li>
+            </ul>
+            <h3>Casos de Uso:</h3>
+            <ul>
+                <li>APIs REST: Serviços web e microserviços</li>
+                <li>Aplicações em tempo real: Chat, notificações, jogos</li>
+                <li>Single Page Applications: Backend para SPAs</li>
+                <li>Ferramentas de linha de comando: CLIs e scripts</li>
+                <li>Streaming de dados: Upload/download de ficheiros</li>
+                <li>IoT: Internet das Coisas</li>
+            </ul>
+            <h3>Empresas que usam Node.js:</h3>
+            <p>Netflix, Uber, Airbnb, WhatsApp, LinkedIn, PayPal, eBay, NASA, e muitas outras grandes empresas confiam no Node.js para as suas aplicações críticas.</p>
+        </section>
+
+        <section id="instalacao">
+            <h2>Instalação e Setup</h2>
+            <h3>Instalar Node.js:</h3>
+            <ul>
+                <li>Oficial: Descarrega de nodejs.org</li>
+                <li>NVM (recomendado): Node Version Manager para gerir versões</li>
+                <li>Package managers: Chocolatey (Windows), Homebrew (macOS)</li>
+            </ul>
+            <h3>Verificar Instalação:</h3>
+            <pre>
+                <code>
+# Verificar versões
+node --version     # v20.x.x
+npm --version      # 10.x.x
+
+# Primeiro programa
+echo "console.log('Hello, Node.js!');" > app.js
+node app.js        # Hello, Node.js!
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Inicializar Projeto:</h3>
+            <pre>
+                <code>
+# Criar package.json
+npm init -y
+
+# Instalar dependências
+npm install express        # Produção
+npm install --save-dev nodemon  # Desenvolvimento
+
+# Scripts no package.json
+{
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest"
+  }
+}
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Estrutura de Projeto:</h3>
+            <pre>
+                <code>
+meu-projeto/
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── app.js              # Ponto de entrada
+├── routes/             # Rotas da aplicação
+│   ├── users.js
+│   └── products.js
+├── models/             # Modelos de dados
+│   └── User.js
+├── controllers/        # Lógica de negócio
+│   └── userController.js
+├── middleware/         # Middleware personalizado
+│   └── auth.js
+├── config/            # Configurações
+│   └── database.js
+└── public/            # Ficheiros estáticos
+    ├── css/
+    ├── js/
+    └── images/
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="modulos">
+            <h2>Sistema de Módulos</h2>
+            <p>Node.js usa o sistema CommonJS para importar e exportar módulos:</p>
+            <h3>Módulos Nativos:</h3>
+            <pre>
+                <code>
+// File System
+const fs = require('fs');
+fs.readFile('ficheiro.txt', 'utf8', (err, data) => {
+    if (err) throw err;
+    console.log(data);
+});
+
+// HTTP
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end('<h1>Hello World!</h1>');
+});
+server.listen(3000);
+
+// Path
+const path = require('path');
+console.log(path.join(__dirname, 'uploads', 'image.jpg'));
+
+// URL
+const url = require('url');
+const parsed = url.parse('http://exemplo.com/path?query=value');
+console.log(parsed.pathname); // /path
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Criar Módulos Personalizados:</h3>
+            <pre>
+                <code>
+// math.js - Módulo personalizado
+function somar(a, b) {
+    return a + b;
+}
+
+function subtrair(a, b) {
+    return a - b;
+}
+
+// Exportar funções
+module.exports = {
+    somar,
+    subtrair,
+    PI: 3.14159
+};
+
+// Alternativa
+exports.multiplicar = (a, b) => a * b;
+
+// app.js - Usar o módulo
+const math = require('./math');
+console.log(math.somar(5, 3));        // 8
+console.log(math.PI);                 // 3.14159
+
+// Desestruturação
+const { somar, subtrair } = require('./math');
+console.log(somar(10, 5));            // 15
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>ES6 Modules (alternativa moderna):</h3>
+            <pre>
+                <code>
+// package.json
+{
+  "type": "module"
+}
+
+// math.mjs
+export function somar(a, b) {
+    return a + b;
+}
+
+export default function multiplicar(a, b) {
+    return a * b;
+}
+
+// app.mjs
+import multiplicar, { somar } from './math.mjs';
+console.log(somar(5, 3));           // 8
+console.log(multiplicar(4, 6));     // 24
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>NPM - Gestor de Packages:</h3>
+            <pre>
+                <code>
+# Instalar packages
+npm install lodash          # Localmente
+npm install -g nodemon      # Globalmente
+npm install --save-dev jest # Desenvolvimento
+
+# Usar packages
+const _ = require('lodash');
+const numeros = [1, 2, 3, 4, 5];
+console.log(_.sum(numeros)); // 15
+
+# Scripts úteis
+npm start                   # Executar aplicação
+npm test                    # Executar testes
+npm run dev                 # Modo desenvolvimento
+npm audit                   # Verificar vulnerabilidades
+npm update                  # Atualizar dependências
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="express">
+            <h2>Express.js Framework</h2>
+            <p>Express.js é o framework web mais popular para Node.js, fornecendo funcionalidades robustas para aplicações web e APIs:</p>
+            <h3>Instalação e Setup Básico:</h3>
+            <pre>
+                <code>
+# Instalar Express
+npm install express
+
+// app.js - Servidor básico
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware para parsing JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Rota básica
+app.get('/', (req, res) => {
+    res.send('<h1>Bem-vindo ao Express!</h1>');
+});
+
+// Iniciar servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Rotas e Métodos HTTP:</h3>
+            <pre>
+                <code>
+// Diferentes métodos HTTP
+app.get('/users', (req, res) => {
+    res.json({ message: 'Lista de utilizadores' });
+});
+
+app.post('/users', (req, res) => {
+    const { name, email } = req.body;
+    res.json({ message: 'Utilizador criado', data: { name, email } });
+});
+
+app.put('/users/:id', (req, res) => {
+    const { id } = req.params;
+    res.json({ message: `Utilizador ${id} atualizado` });
+});
+
+app.delete('/users/:id', (req, res) => {
+    const { id } = req.params;
+    res.json({ message: `Utilizador ${id} removido` });
+});
+
+// Parâmetros de rota
+app.get('/users/:id', (req, res) => {
+    const { id } = req.params;
+    res.json({ userId: id });
+});
+
+// Query parameters
+app.get('/search', (req, res) => {
+    const { q, page = 1, limit = 10 } = req.query;
+    res.json({ query: q, page, limit });
+});
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Middleware:</h3>
+            <pre>
+                <code>
+// Middleware personalizado
+const logger = (req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${new Date().toISOString()}`);
+    next(); // Passar para o próximo middleware
+};
+
+app.use(logger); // Aplicar a todas as rotas
+
+// Middleware de autenticação
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    
+    if (!token) {
+        return res.sendStatus(401);
+    }
+    
+    // Verificar token (simulado)
+    if (token === 'valid-token') {
+        req.user = { id: 1, name: 'João' };
+        next();
+    } else {
+        res.sendStatus(403);
+    }
+};
+
+// Usar middleware em rotas específicas
+app.get('/protected', authenticateToken, (req, res) => {
+    res.json({ message: 'Dados protegidos', user: req.user });
+});
+
+// Middleware de tratamento de erros
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Algo deu errado!' });
+});
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Serving Ficheiros Estáticos:</h3>
+            <pre>
+                <code>
+// Servir ficheiros estáticos
+app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
+
+// Template engines
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.get('/profile', (req, res) => {
+    const user = { name: 'João', email: 'joao@email.com' };
+    res.render('profile', { user });
+});
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="apis">
+            <h2>Criação de APIs REST</h2>
+            <p>APIs REST seguem padrões HTTP para criar interfaces de comunicação entre aplicações:</p>
+            <h3>Estrutura de uma API REST:</h3>
+            <pre>
+                <code>
+// controllers/userController.js
+let users = [
+    { id: 1, name: 'João', email: 'joao@email.com' },
+    { id: 2, name: 'Maria', email: 'maria@email.com' }
+];
+
+const getAllUsers = (req, res) => {
+    res.json({
+        success: true,
+        data: users,
+        count: users.length
+    });
+};
+
+const getUserById = (req, res) => {
+    const { id } = req.params;
+    const user = users.find(u => u.id === parseInt(id));
+    
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            message: 'Utilizador não encontrado'
+        });
+    }
+    
+    res.json({
+        success: true,
+        data: user
+    });
+};
+
+const createUser = (req, res) => {
+    const { name, email } = req.body;
+    
+    // Validação simples
+    if (!name || !email) {
+        return res.status(400).json({
+            success: false,
+            message: 'Nome e email são obrigatórios'
+        });
+    }
+    
+    const newUser = {
+        id: users.length + 1,
+        name,
+        email
+    };
+    
+    users.push(newUser);
+    
+    res.status(201).json({
+        success: true,
+        data: newUser,
+        message: 'Utilizador criado com sucesso'
+    });
+};
+
+const updateUser = (req, res) => {
+    const { id } = req.params;
+    const { name, email } = req.body;
+    
+    const userIndex = users.findIndex(u => u.id === parseInt(id));
+    
+    if (userIndex === -1) {
+        return res.status(404).json({
+            success: false,
+            message: 'Utilizador não encontrado'
+        });
+    }
+    
+    users[userIndex] = { ...users[userIndex], name, email };
+    
+    res.json({
+        success: true,
+        data: users[userIndex],
+        message: 'Utilizador atualizado com sucesso'
+    });
+};
+
+const deleteUser = (req, res) => {
+    const { id } = req.params;
+    const userIndex = users.findIndex(u => u.id === parseInt(id));
+    
+    if (userIndex === -1) {
+        return res.status(404).json({
+            success: false,
+            message: 'Utilizador não encontrado'
+        });
+    }
+    
+    users.splice(userIndex, 1);
+    
+    res.json({
+        success: true,
+        message: 'Utilizador removido com sucesso'
+    });
+};
+
+module.exports = {
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
+};
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Rotas da API:</h3>
+            <pre>
+                <code>
+// routes/users.js
+const express = require('express');
+const router = express.Router();
+const {
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
+} = require('../controllers/userController');
+
+// Rotas CRUD
+router.get('/', getAllUsers);          // GET /api/users
+router.get('/:id', getUserById);       // GET /api/users/:id
+router.post('/', createUser);          // POST /api/users
+router.put('/:id', updateUser);        // PUT /api/users/:id
+router.delete('/:id', deleteUser);     // DELETE /api/users/:id
+
+module.exports = router;
+
+// app.js - Usar as rotas
+const userRoutes = require('./routes/users');
+app.use('/api/users', userRoutes);
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Validação e Error Handling:</h3>
+            <pre>
+                <code>
+// Middleware de validação
+const validateUser = (req, res, next) => {
+    const { name, email } = req.body;
+    const errors = [];
+    
+    if (!name || name.trim().length < 2) {
+        errors.push('Nome deve ter pelo menos 2 caracteres');
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+        errors.push('Email inválido');
+    }
+    
+    if (errors.length > 0) {
+        return res.status(400).json({
+            success: false,
+            message: 'Dados inválidos',
+            errors
+        });
+    }
+    
+    next();
+};
+
+// Usar validação
+router.post('/', validateUser, createUser);
+
+// Error handling global
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || 'Erro interno do servidor',
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+    });
+});
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>CORS e Segurança:</h3>
+            <pre>
+                <code>
+// Instalar dependências de segurança
+npm install cors helmet compression
+
+// app.js
+const cors = require('cors');
+const helmet = require('helmet');
+const compression = require('compression');
+
+// Middleware de segurança
+app.use(helmet());          // Headers de segurança
+app.use(compression());     // Compressão gzip
+app.use(cors({              // CORS configurado
+    origin: ['http://localhost:3000', 'https://meusite.com'],
+    credentials: true
+}));
+
+// Rate limiting
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutos
+    max: 100 // máximo 100 requests por IP
+});
+app.use(limiter);
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+        </section>
+
+        <section id="banco-dados">
+            <h2>Integração com Base de Dados</h2>
+            <p>Node.js pode conectar-se a qualquer tipo de base de dados. Vamos ver exemplos com MongoDB e MySQL:</p>
+            <h3>MongoDB com Mongoose:</h3>
+            <pre>
+                <code>
+# Instalar MongoDB driver
+npm install mongoose
+
+// config/database.js
+const mongoose = require('mongoose');
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log(`MongoDB conectado: ${conn.connection.host}`);
+    } catch (error) {
+        console.error('Erro de conexão:', error);
+        process.exit(1);
+    }
+};
+
+module.exports = connectDB;
+
+// models/User.js
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, 'Nome é obrigatório'],
+        trim: true,
+        maxlength: [50, 'Nome não pode ter mais de 50 caracteres']
+    },
+    email: {
+        type: String,
+        required: [true, 'Email é obrigatório'],
+        unique: true,
+        lowercase: true,
+        match: [/^\S+@\S+\.\S+$/, 'Email inválido']
+    },
+    age: {
+        type: Number,
+        min: [0, 'Idade não pode ser negativa'],
+        max: [120, 'Idade não pode ser maior que 120']
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    }
+}, {
+    timestamps: true // createdAt e updatedAt automáticos
+});
+
+module.exports = mongoose.model('User', userSchema);
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Controller com MongoDB:</h3>
+            <pre>
+                <code>
+// controllers/userController.js
+const User = require('../models/User');
+
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({ isActive: true })
+            .select('-__v')
+            .sort({ createdAt: -1 });
+            
+        res.json({
+            success: true,
+            count: users.length,
+            data: users
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Erro ao buscar utilizadores',
+            error: error.message
+        });
+    }
+};
+
+const createUser = async (req, res) => {
+    try {
+        const user = await User.create(req.body);
+        
+        res.status(201).json({
+            success: true,
+            data: user,
+            message: 'Utilizador criado com sucesso'
+        });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            const errors = Object.values(error.errors).map(err => err.message);
+            return res.status(400).json({
+                success: false,
+                message: 'Dados inválidos',
+                errors
+            });
+        }
+        
+        if (error.code === 11000) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email já existe'
+            });
+        }
+        
+        res.status(500).json({
+            success: false,
+            message: 'Erro ao criar utilizador',
+            error: error.message
+        });
+    }
+};
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>MySQL com Sequelize:</h3>
+            <pre>
+                <code>
+# Instalar MySQL driver
+npm install mysql2 sequelize
+
+// config/database.js
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        host: process.env.DB_HOST,
+        dialect: 'mysql',
+        logging: false, // Desativar logs SQL
+        pool: {
+            max: 10,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
+        }
+    }
+);
+
+const connectDB = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('MySQL conectado com sucesso');
+        
+        // Sincronizar modelos (desenvolvimento)
+        if (process.env.NODE_ENV === 'development') {
+            await sequelize.sync({ alter: true });
+        }
+    } catch (error) {
+        console.error('Erro de conexão MySQL:', error);
+        process.exit(1);
+    }
+};
+
+module.exports = { sequelize, connectDB };
+
+// models/User.js
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database');
+
+const User = sequelize.define('User', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [2, 50]
+        }
+    },
+    email: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true
+        }
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        validate: {
+            min: 0,
+            max: 120
+        }
+    },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    }
+}, {
+    timestamps: true,
+    tableName: 'users'
+});
+
+module.exports = User;
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+            <h3>Environment Variables:</h3>
+            <pre>
+                <code>
+# .env
+NODE_ENV=development
+PORT=3000
+
+# MongoDB
+MONGO_URI=mongodb://localhost:27017/meuapp
+
+# MySQL
+DB_HOST=localhost
+DB_NAME=meuapp
+DB_USER=root
+DB_PASSWORD=password
+
+# JWT
+JWT_SECRET=meu_super_secret_jwt_key
+JWT_EXPIRE=30d
+
+// app.js
+require('dotenv').config();
+
+// Usar variáveis
+const PORT = process.env.PORT || 3000;
+const mongoUri = process.env.MONGO_URI;
+
+// Não fazer commit do .env!
+// Adicionar ao .gitignore
+echo ".env" >> .gitignore
+                </code>
+                <button class="compile-btn">Compilador</button>
+            </pre>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+        <p>José Lamelas | João Rio</p>
+    </footer>
+</body>
+</html>

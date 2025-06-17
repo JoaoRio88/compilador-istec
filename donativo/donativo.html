@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajude Estudantes a Aprender Programação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Ajuda o projeto, ajuda outros alunos.</h1>
+            <p>Com o seu apoio, podemos oferecer recursos gratuitos para estudantes que desejam iniciar-se em HTML, CSS e JavaScript. <p> Juntos, podemos criar a próxima geração de programadores!</p>
+        </header>
+
+        <section class="donation-section">
+            <h2>Faz a tua Doação 1€ pode fazer a diferença</h2>
+            <div class="donation-options">
+                <button onclick="donate(1)">1€</button>
+                <button onclick="donate(5)">5€</button>
+                <button onclick="donate(10)">10€</button>
+                <button onclick="donate(20)">20€</button>
+            </div>
+            <form id="donation-form">
+                <label for="custom-donation">Ou outra quantia: </label>
+                <input type="number" id="custom-donation" placeholder="Insira o valor">
+                <button type="submit">Doar</button>
+            </form>
+        </section>
+
+        <section class="progress">
+              <div class="progress-bar">
+                <div id="progress" class="progress"></div>
+            </div>
+            <p id="donation-amount">Total arrecadado: 0€</p>
+        </section>
+
+        <section class="testimonials">
+            <h3>Testemunho de Doações</h3>
+            <blockquote>
+                <p>"Graças aos recursos que este website oferece, consegui aprender a programar e agora estou a criar o meu próprio site!"<p> Joana, Farmaceutica </p>
+            </blockquote>
+        </section>
+
+        <footer>
+            <p>&copy; 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+            <p>José Lamelas | João Rio</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../script_darkmode.js"></script>
+</body>
+</html>

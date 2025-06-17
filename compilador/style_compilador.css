@@ -1,0 +1,233 @@
+/* Reset Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Light Mode (Padrão) */
+body.light-mode {
+    background-color: #f9f9f9;
+    color: #111;
+}
+
+body.light-mode .container {
+    background-color: #f9f9f9;
+}
+
+body.light-mode .actions button,
+body.light-mode button,
+body.light-mode #newProjectBtn {
+    background-color: #c1c1c1;
+    color: #111;
+}
+
+body.light-mode .actions button:hover,
+body.light-mode button:hover,
+body.light-mode #newProjectBtn:hover {
+    background-color: #d0d0d0;
+}
+
+body.light-mode footer {
+    color: #666;
+}
+
+body.light-mode #outputPanel {
+    background-color: #ffffff;
+}
+
+body.light-mode .browser-header {
+    background-color: #e7e7e7;
+    color: #111;
+}
+
+body.light-mode .CodeMirror {
+    background-color: #f9f9f9 !important;
+    color: #2d2d2d !important;
+}
+
+body.light-mode .CodeMirror-gutters {
+    background-color: #eaeaea !important;
+    border-right: 1px solid #ccc;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #11101d;
+    color: #ffffff;
+}
+
+body.dark-mode .container {
+    background-color: #11101d;
+}
+
+body.dark-mode .actions button,
+body.dark-mode button,
+body.dark-mode #newProjectBtn {
+    background-color: #2b2758;
+    color: #ffffff;
+}
+
+body.dark-mode .actions button:hover,
+body.dark-mode button:hover,
+body.dark-mode #newProjectBtn:hover {
+    background-color: #005f99;
+}
+
+body.dark-mode footer {
+    color: #9e9e9e;
+}
+
+body.dark-mode #outputPanel {
+    background-color: #ffffff;
+}
+
+body.dark-mode .browser-header {
+    background-color: #333;
+    color: #ffffff;
+}
+
+body.dark-mode .CodeMirror {
+    background-color: #282a36 !important;
+    color: #f8f8f2 !important;
+}
+
+body.dark-mode .CodeMirror-gutters {
+    background-color: #1e1e1e !important;
+    border-right: 1px solid #444;
+}
+
+/* Estilos Gerais */
+body {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.actions button {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#newProjectBtn {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 30px;
+    position: absolute;
+    right: 50%;
+}
+
+button {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.editor-view {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    min-height: 0;
+}
+
+#editorPanel, #outputPanel {
+    flex: 1; /* Já existe, mas garante que ambos comecem com largura igual */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 100px; /* Largura mínima para combinar com o JS */
+}
+
+#codeEditor {
+    flex: 1;
+}
+
+#separator {
+    width: 2px;
+    background-color: #999;
+    cursor: col-resize;
+    height: 100%;
+    z-index: 10;
+}
+
+iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .editor-view {
+        flex-direction: column;
+    }
+    #separator {
+        display: none;
+    }
+    #outputPanel {
+       flex-direction: column;
+    }
+    #newProjectBtn {
+        position: static;
+        margin-left: 10px;
+    }
+}
+
+.light-mode-forced {
+    background-color: white !important;
+    color: black !important;
+}
+.light-mode-forced .browser-header {
+    background-color: #f0f0f0 !important;
+    color: black !important;
+}
+.light-mode-forced iframe {
+    background-color: white !important;
+    color: black !important;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compilador HTML, CSS e JS</title>
+    <link rel="stylesheet" href="style_compilador.css">
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Botões de Alternância -->
+        <div class="buttons">
+            <button id="htmlBtn" onclick="switchEditor('html')">HTML</button>
+            <button id="cssBtn" onclick="switchEditor('css')">CSS</button>
+            <button id="jsBtn" onclick="switchEditor('js')">JS</button>
+        </div>
+        
+        <!-- Editor e Browser -->
+        <div class="editor-view">
+            <!-- Editor de Código -->
+            <div id="editorPanel">
+                <textarea id="codeEditor"></textarea>
+            </div>
+            <!-- Separador Redimensionável -->
+            <div id="separator"></div>
+            <!-- Mostrador (Output) -->
+            <div id="outputPanel">
+                <div class="browser-header">🔴 🟡 🟢 Simulação do Browser</div>
+                <iframe id="outputFrame"></iframe>
+            </div>
+        </div>
+
+        <!-- Botões Copiar, Download e Novo -->
+        <div class="actions">
+            <button onclick="copyCode()">Copiar</button>
+            <button onclick="downloadProject()">Download</button>
+            <button id="newProjectBtn" onclick="newProject()">Novo</button>
+        </div>
+        <footer>
+            <p>&copy; 1º Ano Eng. Multimédia - Web e Multimédia - ISTEC PORTO 2024/2025</p>
+            <p>José Lamelas | João Rio</p>
+        </footer>
+    </div>
+
+    <!-- Dependências -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script_compilador.js"></script>
+    <script src="../script_darkmode.js"></script>
+</body>
+</html>

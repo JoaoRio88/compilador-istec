@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Compilador ISTEC</title>
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <!-- Particles background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo-icon">
+                <img src="https://istec-porto.pt/wp-content/uploads/2020/01/beAsset-1logo.png" alt="Logotipo ISTEC" class="istec-logo">
+            </div>
+            <h1 class="logo-title">Compilador ISTEC</h1>
+            <p class="logo-subtitle">Para Iniciantes</p>
+        </div>
+
+        <!-- Login Content -->
+        <div class="login-content">
+            <div class="istec-badge">
+                <i class="bx bxs-school"></i>
+                ISTEC Porto
+            </div>
+            
+            <h2 class="login-title">Acesso Restrito</h2>
+            <p class="login-description">
+                Esta plataforma é exclusiva para estudantes e docentes do ISTEC Porto. 
+                Faça login com a sua conta institucional para aceder ao compilador.
+            </p>
+
+            <!-- Error Messages -->
+            <div id="error-message" class="error-message">
+                <i class="bx bx-error"></i>
+                <span id="error-text"></span>
+            </div>
+
+            <!-- Success Messages -->
+            <div id="success-message" class="success-message">
+                <i class="bx bx-check"></i>
+                <span id="success-text"></span>
+            </div>
+
+            <!-- Google Login Button -->
+            <button class="google-login-btn" onclick="loginWithGoogle()">
+                <i class="bx bxl-google"></i>
+                <span>Entrar com Google ISTEC</span>
+            </button>
+
+            <!-- Security Info -->
+            <div class="security-info">
+                <h4>
+                    <i class="bx bx-shield-check"></i>
+                    Segurança & Privacidade
+                </h4>
+                <p>
+                    Apenas contas com domínio <strong>@my.istec.pt</strong> têm acesso. 
+                    Os seus dados são protegidos e não são partilhados com terceiros.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-info">
+        <p>© 2024/2025 ISTEC Porto | José Lamelas | João Rio</p>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
